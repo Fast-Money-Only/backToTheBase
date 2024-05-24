@@ -24,19 +24,25 @@ public class GameScreen extends ScreenAdapter {
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
 
-    private Boot game = new Boot();
+    final Boot game;
     private FlytBombe fbGame = new FlytBombe();
 
     // e2
     private IsometricTiledMapRenderer isometricTiledMapRenderer;
     private IsoMapHelper isoMapHelper; // e2
 
+    private int widthScreen, heightScreen;
     // e4
     // game objects
     private Player player;
 
-    public GameScreen(OrthographicCamera camera) {
-        this.camera = camera;
+    public GameScreen(Boot game) {
+        this.game = game;
+        this.widthScreen = Gdx.graphics.getWidth();
+        this.heightScreen = Gdx.graphics.getHeight();
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, widthScreen, heightScreen);
+
         this.batch = new SpriteBatch();
         this.world = new World(new Vector2(0,0), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
