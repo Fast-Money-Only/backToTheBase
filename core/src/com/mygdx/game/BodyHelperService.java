@@ -14,7 +14,7 @@ public class BodyHelperService {
         bodyDef.position.set(0, 0);
         Body body = world.createBody(bodyDef);
 
-        //shape.setAsBox(64 / 2 / PPM, 32 / 2 / PPM); //Collisoncheck med grænser
+        shape.setAsBox(1 / PPM, 1 / PPM, Vector2.Zero, 45); //Collisoncheck med grænser
 
 
         FixtureDef fixtureDef = new FixtureDef();
@@ -22,6 +22,7 @@ public class BodyHelperService {
         fixtureDef.friction = 0; // prevent sticking to walls
         fixtureDef.density = 1000;
         body.createFixture(fixtureDef);
+        body.setFixedRotation(true);
 
         return body;
     }
