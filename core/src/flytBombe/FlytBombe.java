@@ -1,9 +1,8 @@
-package flytBome;
+package flytBombe;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.GameScreen;
 
 public class FlytBombe extends Game {
 	public SpriteBatch batch;

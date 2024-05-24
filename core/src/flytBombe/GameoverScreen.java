@@ -1,28 +1,27 @@
-package flytBome;
+package flytBombe;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.GameScreen;
 
-public class MainMenuScreen implements Screen {
+public class GameoverScreen implements Screen {
 
     final FlytBombe game;
+
     Texture backgroundImg;
 
     OrthographicCamera camera;
 
-    public MainMenuScreen(final FlytBombe game) {
+    public GameoverScreen(final FlytBombe game) {
         this.game = game;
 
-        backgroundImg = new Texture(Gdx.files.internal("welcomeBG.jpg"));
+        backgroundImg = new Texture(Gdx.files.internal("gameoverBG.jpg"));
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1792, 1344);
     }
-
     @Override
     public void show() {
 
@@ -36,20 +35,21 @@ public class MainMenuScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
+        game.font.getData().setScale(3, 3);
         game.batch.draw(backgroundImg, 0, 0);
-        game.font.draw(game.batch, "Du skal nu flytte bomben sikkert fra ammunitionsbunkeren til basen ", 100, 150);
-        game.font.draw(game.batch, "Klik på skærmen for at starte", 100, 100);
+        game.font.draw(game.batch, "GAMEOVER", camera.viewportWidth /2 - 100, camera.viewportHeight /2 + 40);
+        game.font.draw(game.batch, "Du ramte en sten, og bomben sprang", camera.viewportWidth / 2 - 320, camera.viewportHeight /2 - 40);
+        game.font.draw(game.batch, "Tryk for at gå tilbage til menuen!", camera.viewportWidth / 2, 200);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {
-
             try {
-                //game.setScreen(new GameScreen(game));
-                dispose();
-            } catch (Exception e){
-                System.out.println(e.getMessage());
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-
+            game.setScreen(new MainMenuScreen(game));
+            dispose();
         }
     }
 

@@ -1,4 +1,4 @@
-package flytBome;
+package flytBombe;
 
 import com.badlogic.gdx.graphics.Texture;
 

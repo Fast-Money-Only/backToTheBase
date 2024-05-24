@@ -116,6 +116,7 @@ public class GameScreen implements Screen {
             game.batch.draw(w.getTexture(), (float) w.getX(), (float) w.getY());
         }
 
+
         game.batch.end();
 
         grabWeight();

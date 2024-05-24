@@ -82,7 +82,7 @@ public class GameScreen extends ScreenAdapter {
         isometricTiledMapRenderer.render(); // e2
 
         batch.begin();
-
+        player.render(batch);
         batch.end();
         box2DDebugRenderer.render(world,camera.combined.scl(PPM));
 

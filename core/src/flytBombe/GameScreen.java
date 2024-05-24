@@ -1,4 +1,4 @@
-package flytBome;
+package flytBombe;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -226,6 +226,7 @@ public class GameScreen implements Screen {
 
         game.batch.draw(bombeImg, (float) bombe.getX(), (float) bombe.getY(), bombe.width, bombe.height);
 
+        game.font.getData().setScale(3, 3);
         game.font.draw(game.batch, "Sten undviget: " + dodgedStones, 10, 20);
         game.font.draw(game.batch, vindertekst , 290, 200);
 
