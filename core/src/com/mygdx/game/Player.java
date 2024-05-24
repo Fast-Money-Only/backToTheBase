@@ -8,13 +8,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import flytBombe.FlytBombe;
 
 import static com.mygdx.game.Constants.PPM;
 
 public class Player extends GameEntity {
 
+
     Texture texture;
     Sprite sprite;
+    boolean isOnMiniGame = false;
 
     public Player(float width, float height, Body body) {
         super(width, height, body);
@@ -38,7 +41,8 @@ public class Player extends GameEntity {
             BitmapFont font = new BitmapFont();
             font.draw(batch, "Klik Enter for at spille minigame!", 3445, -440);
             if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-
+                System.out.println("Enter is pressed");
+                isOnMiniGame = true;
             }
 
         }
@@ -71,8 +75,6 @@ public class Player extends GameEntity {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
             velY -= 1;
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
-            System.out.println("Player coordinate: X: " + x + " Y: " + y);
 
         body.setLinearVelocity(velX * speed, velY * speed);
 

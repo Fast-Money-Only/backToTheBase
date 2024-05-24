@@ -17,7 +17,7 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(final FlytBombe game) {
         this.game = game;
 
-        backgroundImg = new Texture(Gdx.files.internal("welcomeBG.jpg"));
+        backgroundImg = new Texture(Gdx.files.internal("flytBombe/welcomeBG.jpg"));
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1792, 1344);

@@ -48,13 +48,13 @@ public class GameScreen implements Screen {
     public GameScreen(FlytBombe game) {
         this.game = game;
 
-        stenImg = new Texture(Gdx.files.internal("rock.png"));
-        bombeImg = new Texture(Gdx.files.internal("cart.png"));
-        backgroundImg = new Texture(Gdx.files.internal("FlytBg.png"));
-        startBGImg = new Texture(Gdx.files.internal("flytBGstart.png"));
-        midtBGImg = new Texture(Gdx.files.internal("FlytBg.png"));
-        slutBGImg = new Texture(Gdx.files.internal("flytBGgoal.png"));
-        exploImg = new Texture(Gdx.files.internal("explosion.png"));
+        stenImg = new Texture(Gdx.files.internal("flytBombe/rock.png"));
+        bombeImg = new Texture(Gdx.files.internal("flytBombe/cart.png"));
+        backgroundImg = new Texture(Gdx.files.internal("flytBombe/FlytBg.png"));
+        startBGImg = new Texture(Gdx.files.internal("flytBombe/flytBGstart.png"));
+        midtBGImg = new Texture(Gdx.files.internal("flytBombe/FlytBg.png"));
+        slutBGImg = new Texture(Gdx.files.internal("flytBombe/flytBGgoal.png"));
+        exploImg = new Texture(Gdx.files.internal("flytBombe/explosion.png"));
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1792, 1344);

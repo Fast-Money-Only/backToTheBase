@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import flytBombe.FlytBombe;
 
 import static com.mygdx.game.Constants.PPM;
 import static com.mygdx.game.Constants.map0;
@@ -22,6 +23,9 @@ public class GameScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
+
+    private Boot game = new Boot();
+    private FlytBombe fbGame = new FlytBombe();
 
     // e2
     private IsometricTiledMapRenderer isometricTiledMapRenderer;
@@ -35,14 +39,10 @@ public class GameScreen extends ScreenAdapter {
         this.camera = camera;
         this.batch = new SpriteBatch();
         this.world = new World(new Vector2(0,0), false);
-        // e4 i stedet for linjen ovenfor
-        //this.world = new World(new Vector2(0,-9.81f), false);
-        // e5 linje nedenfor
-        //this.world = new World(new Vector2(0,-25f), false);         // e5 så hoppes der bedre
         this.box2DDebugRenderer = new Box2DDebugRenderer();
 
-        this.isoMapHelper = new IsoMapHelper(this);  // e2, e3: parameter
-        this.isometricTiledMapRenderer = isoMapHelper.setupMap(map0); // e2
+        this.isoMapHelper = new IsoMapHelper(this);
+        this.isometricTiledMapRenderer = isoMapHelper.setupMap(map0);
 
     }
 
@@ -86,6 +86,15 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
         box2DDebugRenderer.render(world,camera.combined.scl(PPM));
 
+        if (player.isOnMiniGame){
+
+            try {
+                System.out.println("Starter minigame...");
+                game.setScreen(new flytBombe.MainMenuScreen(fbGame));
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     // e3

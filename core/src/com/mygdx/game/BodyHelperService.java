@@ -17,7 +17,6 @@ public class BodyHelperService {
         //shape.setAsBox(64 / 2 / PPM, 32 / 2 / PPM); //Collisoncheck med grænser
 
 
-
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.friction = 0; // prevent sticking to walls

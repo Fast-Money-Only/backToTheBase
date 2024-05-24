@@ -10,4 +10,5 @@ public class Constants {
     public static final String map3 = "maps/tonyMap.tmx";
     public static final String map4 = "maps/toscaMap.tmx";
 
+
 }

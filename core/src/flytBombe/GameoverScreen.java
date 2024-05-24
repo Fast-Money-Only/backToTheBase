@@ -17,7 +17,7 @@ public class GameoverScreen implements Screen {
     public GameoverScreen(final FlytBombe game) {
         this.game = game;
 
-        backgroundImg = new Texture(Gdx.files.internal("gameoverBG.jpg"));
+        backgroundImg = new Texture(Gdx.files.internal("flytBombe/gameoverBG.jpg"));
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1792, 1344);

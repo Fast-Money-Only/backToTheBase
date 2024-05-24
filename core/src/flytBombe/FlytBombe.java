@@ -11,7 +11,7 @@ public class FlytBombe extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont(); // use libGDX's default Arial font
-		//this.setScreen(new GameScreen(this));
+		this.setScreen(new MainMenuScreen(this));
 	}
 
 
