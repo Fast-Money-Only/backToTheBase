@@ -1,48 +1,56 @@
 package balancerZeppeliner;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.awt.*;
 
 public class Zeppeliner extends Rectangle {
 
-        private Texture texture;
-        private float x, y;
-        private float rotation;
+    private Texture texture;
+    private float x, y;
+    private float rotation;
 
-        public Zeppeliner(Texture texture, float x, float y) {
-            this.texture = texture;
-            this.x = x;
-            this.y = y;
-            this.rotation = 0;
-        }
 
-        public Texture getTexture() {
-            return texture;
-        }
+    private Sprite sprite;
 
-        public double getX() {
-            return x;
-        }
+    public Zeppeliner(Texture texture, float x, float y) {
+        this.sprite = new Sprite(texture);
+        this.sprite.setPosition(x, y);
+        this.sprite.setOriginCenter(); // Set the origin for rotation to the center of the sprite
+    }
 
-        public double getY() {
-            return y;
-        }
+    public Texture getTexture() {
+        return sprite.getTexture();
+    }
 
-        public float getRotation() {
-            return rotation;
-        }
+    public double getX() {
+        return sprite.getX();
+    }
 
-        public void setRotation(float rotation) {
-            this.rotation = rotation;
-        }
+    public double getY() {
+        return sprite.getY();
+    }
 
-        public void rotate(float angle) {
-            this.rotation += angle;
-        }
+    public float getRotation() {
+        return sprite.getRotation();
+    }
 
-        public void resetRotation() {
-            this.rotation = 0;
-        }
+    public void setRotation(float rotation) {
+        sprite.setRotation(rotation);
+    }
+
+    public void rotate(float angle) {
+        sprite.rotate(angle);
+    }
+
+    public void resetRotation() {
+        sprite.setRotation(0);
+    }
+
+    public void draw(SpriteBatch batch) {
+        sprite.draw(batch);
+    }
 
 }

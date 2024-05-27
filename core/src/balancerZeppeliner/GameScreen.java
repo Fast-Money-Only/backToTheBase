@@ -6,9 +6,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.Array;
+
+import java.awt.*;
+import java.util.List;
 
 public class GameScreen implements Screen {
 
@@ -111,11 +114,10 @@ public class GameScreen implements Screen {
         game.batch.begin();
 
         game.batch.draw(BGimg, 0, 0);
-        game.batch.draw(zeppeliner.getTexture(), (float) zeppeliner.getX(), (float) zeppeliner.getY());
+        zeppeliner.draw(game.batch);
         for (Weight w : vægtObjekter){
             game.batch.draw(w.getTexture(), (float) w.getX(), (float) w.getY());
         }
-
 
         game.batch.end();
 
@@ -127,23 +129,18 @@ public class GameScreen implements Screen {
     }
 
     private void handleWeightMovementAndRotation() {
-        // If the screen is touched
         if (Gdx.input.isTouched()) {
-            // Get the touch position
             Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
 
-            // Move the new weight
             newWeight.setX(touchPos.x - newWeight.getSize().width / 2);
             newWeight.setY(touchPos.y - newWeight.getSize().height / 2);
         } else {
-            // Check if the new weight is on the zeppeliner
             if (newWeight.getX() > zeppeliner.getX() && newWeight.getX() < (zeppeliner.getX() + zeppeliner.getTexture().getWidth())
                     && newWeight.getY() > zeppeliner.getY() && newWeight.getY() < (zeppeliner.getY() + zeppeliner.getTexture().getHeight())) {
 
-                // Calculate the rotation based on the weight's position relative to the zeppeliner's center
                 float zeppelinerCenterX = (float) (zeppeliner.getX() + zeppeliner.getTexture().getWidth() / 2);
-                float rotationFactor = newWeight.getVægt(); // Adjust this value to control the rotation amount
+                float rotationFactor = newWeight.getVægt();
 
                 if (newWeight.getX() < zeppelinerCenterX) {
                     zeppeliner.rotate(rotationFactor);
@@ -152,7 +149,6 @@ public class GameScreen implements Screen {
                 }
             }
 
-            // Reset the new weight to null after handling its movement and rotation
             newWeight = null;
         }
     }

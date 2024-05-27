@@ -16,7 +16,7 @@ public class GameScreen implements Screen {
 
     final FlytBombe game;
 
-    long lastCorrodeTime; //fix navn
+    long diedTime;
 
     boolean hasDied = false;
     Texture stenImg;
@@ -33,9 +33,9 @@ public class GameScreen implements Screen {
     Background background, firstBackground, lastBackground;
     OrthographicCamera camera;
 
-    int nextDropTime = 2000000000;
+    int nextDropTime = 18000000;
 
-    long lastDropTime;
+    long lastDropTime, twoDodgedSpawnTime;
 
     int[] positions = {290, 896, 1515};
     int currentPositionIndex = 1;
@@ -118,6 +118,12 @@ public class GameScreen implements Screen {
             Sten rock = iter.next();
             rock.setY((float) (rock.getY() - moveSpeed * Gdx.graphics.getDeltaTime()));
 
+            if (dodgedStones == 2 && rock.getY() + rock.height > ((double) backgroundImg.getHeight() / 2)
+                    && rock.getY() < ((double) backgroundImg.getHeight() / 2)){
+                if (TimeUtils.nanoTime() - twoDodgedSpawnTime > nextDropTime){
+                    spawnRock();
+                }
+            }
             if (rock.getY() + rock.height < 0){
                 iter.remove();
                 spawnRock();
@@ -129,6 +135,11 @@ public class GameScreen implements Screen {
 
             }
         }
+
+        if (dodgedStones == 2){
+            twoDodgedSpawnTime = TimeUtils.nanoTime();
+        }
+
         if (dodgedStones == 5){
             moveSpeed = 400;
         }
@@ -140,6 +151,9 @@ public class GameScreen implements Screen {
         }
 
         if (dodgedStones == 20){
+            moveSpeed = 700;
+        }
+        if (dodgedStones == 50){
             moveSpeed = 200;
             vindertekst = "Du har ført bomben sikkert til basen!";
         }
@@ -154,7 +168,7 @@ public class GameScreen implements Screen {
             baggrund.setY((float) (baggrund.getY() - moveSpeed * Gdx.graphics.getDeltaTime()));
 
             if (baggrund.getY() + baggrund.height < 0){
-                if (dodgedStones == 20){
+                if (dodgedStones == 50){
                     moveSpeed = 0;
                     backgroundImg = slutBGImg;
                 }
@@ -192,7 +206,7 @@ public class GameScreen implements Screen {
 
         moveSpeed = 10;
         hasDied = true;
-        lastCorrodeTime = TimeUtils.nanoTime(); //change
+        diedTime = TimeUtils.nanoTime(); //change
     }
 
     @Override
@@ -227,7 +241,7 @@ public class GameScreen implements Screen {
         game.batch.draw(bombeImg, (float) bombe.getX(), (float) bombe.getY(), bombe.width, bombe.height);
 
         game.font.getData().setScale(3, 3);
-        game.font.draw(game.batch, "Sten undviget: " + dodgedStones, 10, 20);
+        game.font.draw(game.batch, "Sten undviget: " + dodgedStones, 50, 50);
         game.font.draw(game.batch, vindertekst , 290, 200);
 
         game.batch.end();
@@ -237,7 +251,7 @@ public class GameScreen implements Screen {
         checkKeyspressed();
         moveRock();
 
-        if (TimeUtils.nanoTime() - lastCorrodeTime > 500000000 && hasDied){
+        if (TimeUtils.nanoTime() - diedTime > 500000000 && hasDied){
             game.setScreen(new GameoverScreen(game));
             dispose();
         }
